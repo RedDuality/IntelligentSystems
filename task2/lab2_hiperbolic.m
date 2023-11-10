@@ -48,10 +48,10 @@ for index=1:100000
 
         %activation
 
-        y1_1=tanh(v1_1);
-        y2_1=tanh(v2_1);
-        y3_1=tanh(v3_1);
-        y4_1=tanh(v4_1);
+        y1_1 = tanh(v1_1);
+        y2_1 = tanh(v2_1);
+        y3_1 = tanh(v3_1);
+        y4_1 = tanh(v4_1);
 
         %last layer
 

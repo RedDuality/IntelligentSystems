@@ -70,7 +70,7 @@ x2=[metric_A1 metric_A2 metric_A3 metric_P1 metric_P2];
 P=[x1;x2];
 
 %Desired output vector
-T=[1;1;1;-1;-1]; 
+T=[1;1;1;-1;-1];
 
 %% train single perceptron with two inputs and one output
 
@@ -83,69 +83,68 @@ w2 = randn(1);
 b = randn(1);
 
 for i = 1:5
-    
+
     % calculate weighted sum with randomly generated parameters
-    v1 =  P(1,i)*w1 + P(2,i)*w2 + b; 
-    
-    % calculate current output of the perceptron 
+    v1 =  P(1,i)*w1 + P(2,i)*w2 + b;
+
+    % calculate current output of the perceptron
     if v1 > 0
-	    y = 1;
+        y = 1;
     else
-	    y = -1;
+        y = -1;
     end
 
     e = T(i) - y;
 
     tote = tote + abs(e);
- end
+end
 
 eta = 0.4;
 cont = 0;
 % write training algorithm
-while tote ~= 0 
-	cont = cont + 1;
-%   update parameters using current inputs ant current error
+while tote ~= 0
+    cont = cont + 1;
+    %   update parameters using current inputs ant current error
 
-%   w2 = 
-%   b = 
-% 
-%   Test how good are updated parameters (weights) on all examples used for training
-%   calculate outputs and errors for all 5 examples using current values of the parameter set {w1, w2, b}
-%   calculate 'v1', 'v2', 'v3',... 'v5'
-% 
-%   calculate 'y1', ..., 'y5'
-%     
-%   calculate 'e1', ... 'e5'
+    %   w2 =
+    %   b =
+    %
+    %   Test how good are updated parameters (weights) on all examples used for training
+    %   calculate outputs and errors for all 5 examples using current values of the parameter set {w1, w2, b}
+    %   calculate 'v1', 'v2', 'v3',... 'v5'
+    %
+    %   calculate 'y1', ..., 'y5'
+    %
+    %   calculate 'e1', ... 'e5'
 
     for i = 1:5
-    
-        v1 =  P(1,i)*w1 + P(2,i)*w2 + b; 
-    
+
+        v1 =  P(1,i)*w1 + P(2,i)*w2 + b;
+
         if v1 > 0
-	        y = 1;
+            y = 1;
         else
-	        y = -1;
+            y = -1;
         end
 
-    e = T(i) - y;
+        e = T(i) - y;
 
-    w1 = w1 + eta * e * P(1,i);
-    w2 = w2 + eta * e * P(2,i);
-    b = b + eta * e;
+        w1 = w1 + eta * e * P(1,i);
+        w2 = w2 + eta * e * P(2,i);
+        b = b + eta * e;
 
     end
 
     tote = 0;
     for i = 1:5
-    
-        % calculate weighted sum with randomly generated parameters
-        v1 =  P(1,i)*w1 + P(2,i)*w2 + b; 
-    
-        % calculate current output of the perceptron 
+
+        v1 =  P(1,i)*w1 + P(2,i)*w2 + b;
+
+        % calculate current output of the perceptron
         if v1 > 0
-	        y = 1;
+            y = 1;
         else
-	        y = -1;
+            y = -1;
         end
 
         e = T(i) - y;
@@ -166,20 +165,20 @@ T=[1;1;1;1;1;1;-1;-1];
 
 tote = 0;
 for i = 1:8
-    
-        % calculate weighted sum with randomly generated parameters
-        v1 =  P(1,i)*w1 + P(2,i)*w2 + b; 
-    
-        % calculate current output of the perceptron 
-        if v1 > 0
-	        y = 1;
-        else
-	        y = -1;
-        end
 
-        e = T(i) - y;
+    % calculate weighted sum with randomly generated parameters
+    v1 =  P(1,i)*w1 + P(2,i)*w2 + b;
 
-        tote = tote + abs(e);
+    % calculate current output of the perceptron
+    if v1 > 0
+        y = 1;
+    else
+        y = -1;
+    end
+
+    e = T(i) - y;
+
+    tote = tote + abs(e);
 end
 
 if tote == 0
@@ -188,5 +187,5 @@ else
     disp("it's broken!")
 end
 
-    
+
 
