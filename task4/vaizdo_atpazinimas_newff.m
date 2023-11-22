@@ -10,13 +10,13 @@ pozymiai_tinklo_mokymui = pozymiai_raidems_atpazinti(pavadinimas, 8);
 P = cell2mat(pozymiai_tinklo_mokymui);
 % create the matrices of correct answers for each line (number of matrices = number of symbol lines)
 Target = [eye(8), eye(8), eye(8), eye(8), eye(8), eye(8), eye(8), eye(8)];
-% create an RBF network for classification with 13 neurons, and sigma = 1
-tinklas = newrb(P,Target,0,1,13);
+network = feedforwardnet(13);
+network = train(network,P,Target);
 
 %% Test of the network (recognizer)
 % estimate output of the network for unknown symbols (row, that were not used during training)
 P2 = P(:,12:22);
-Y2 = sim(tinklas, P2);
+Y2 = sim(network, P2);
 % find which neural network output gives maximum value
 [a2, b2] = max(Y2);
 %% Visualize result
@@ -47,7 +47,7 @@ for k = 1:raidziu_sk
 end
 % show the result in command window
 disp(atsakymas)
-figure(7), text(0.1,0.5,atsakymas,'FontSize',38)
+%figure(7), text(0.1,0.5,atsakymas,'FontSize',38)
 
 %% Extract features of the test image
 pavadinimas = 'test_kada.png';
@@ -58,7 +58,7 @@ pozymiai_patikrai = pozymiai_raidems_atpazinti(pavadinimas, 1);
 % features from cell-variable are stored to matrix-variable
 P2 = cell2mat(pozymiai_patikrai);
 % estimating neuran network output for newly estimated features
-Y2 = sim(tinklas, P2);
+Y2 = sim(network, P2);
 % searching which output gives maximum value
 [a2, b2] = max(Y2);
 %% Visualization of result
@@ -87,8 +87,9 @@ for k = 1:raidziu_sk
     end
 end
 
-% disp(atsakymas)
-figure(8), text(0.1,0.5,atsakymas,'FontSize',38), axis off
+disp(atsakymas)
+%figure(8), text(0.1,0.5,atsakymas,'FontSize',38), axis off
+
 %% extract features for next/another test image
 pavadinimas = 'test_fikcija.png';
 pozymiai_patikrai = pozymiai_raidems_atpazinti(pavadinimas, 1);
@@ -97,7 +98,7 @@ pozymiai_patikrai = pozymiai_raidems_atpazinti(pavadinimas, 1);
 % poþymiai ið celiø masyvo perkeliami á matricà
 P2 = cell2mat(pozymiai_patikrai);
 % skaièiuojamas tinklo iðëjimas neþinomiems poþymiams
-Y2 = sim(tinklas, P2);
+Y2 = sim(network, P2);
 % ieðkoma, kuriame iðëjime gauta didþiausia reikðmë
 [a2, b2] = max(Y2);
 %% Rezultato atvaizdavimas
@@ -128,3 +129,4 @@ end
 % pateikime rezultatà komandiniame lange
 disp(atsakymas)
 %figure(9), text(0.1,0.5,atsakymas,'FontSize',38), axis off
+
